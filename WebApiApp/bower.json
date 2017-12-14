@@ -1,0 +1,21 @@
+{
+  "name": "bower_components",
+  "authors": [
+    "Dianne Saba <dnsaba19@gmail.com>"
+  ],
+  "description": "trying to install bower",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "Font-Awesome#v4.7.0",
+    "angular": "v1.6.7"
+  }
+}
