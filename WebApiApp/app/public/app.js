@@ -18,10 +18,16 @@ myApp.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
         })
 
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('about', {
-            name: 'about',
-            url: '/about',
-            templateUrl: '/app/public/partialAbout.html'
+        .state('profile', {
+            name: 'profile',
+            url: '/profile',
+            templateUrl: '/app/public/profile.html'  
+        })
+
+        .state('duel', {
+            name: 'duel',
+            url: '/duel',
+            templateUrl: '/app/public/duel.html'
         });
 
 });
