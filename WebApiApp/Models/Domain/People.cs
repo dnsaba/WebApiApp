@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApiApp.Models.Domain
 {
-    public class Profile
+    public class People
     {
         public int Id { get; set; }
         public int UserId { get; set; }
