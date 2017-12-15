@@ -201,14 +201,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\EchoApiController.cs" />
-    <Compile Include="Controllers\api\ProfileController.cs" />
+    <Compile Include="Controllers\api\PersonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Domain\People.cs" />
+    <Compile Include="Models\Domain\Person.cs" />
+    <Compile Include="Models\Domain\PersonInsertRequest.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,13 +220,13 @@
     <Compile Include="Responses\ItemsResponse.cs" />
     <Compile Include="Responses\SuccessResponse.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\PeopleService.cs" />
+    <Compile Include="Services\PersonService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\index.html" />
-    <Content Include="app\public\app.js" />
-    <Content Include="app\public\app.public.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\app.public.js" />
     <Content Include="app\public\partialHome.html" />
     <Content Include="app\public\profile.html" />
     <Content Include="app\public\duel.html" />
@@ -317,6 +318,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\home.controller.js" />
+    <Content Include="Scripts\home.service.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
