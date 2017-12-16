@@ -202,14 +202,20 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\EchoApiController.cs" />
     <Compile Include="Controllers\api\PersonController.cs" />
+    <Compile Include="Controllers\api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Services\Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Services\Interfaces\IUserAuthData.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Domain\LoginUser.cs" />
     <Compile Include="Models\Domain\Person.cs" />
     <Compile Include="Models\Domain\PersonInsertRequest.cs" />
+    <Compile Include="Models\Domain\RegisterUser.cs" />
+    <Compile Include="Models\Domain\UserBase.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -220,7 +226,11 @@
     <Compile Include="Responses\ItemsResponse.cs" />
     <Compile Include="Responses\SuccessResponse.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\Cryptography\CryptographyService.cs" />
+    <Compile Include="Services\OwinAuthenticationService.cs" />
     <Compile Include="Services\PersonService.cs" />
+    <Compile Include="Services\Security\IIdentityExtensions.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -318,8 +328,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\home.controller.js" />
-    <Content Include="Scripts\home.service.js" />
+    <Content Include="Scripts\user.controller.js" />
+    <Content Include="Scripts\user.service.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
@@ -362,6 +372,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

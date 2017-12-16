@@ -15,7 +15,7 @@
                 name: 'home',
                 url: '/home',
                 templateUrl: '/app/public/partialHome.html',
-                controller: "homeController as homeCtrl"
+                controller: "userController as userCtrl"
             })
 
             // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
