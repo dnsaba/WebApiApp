@@ -86,6 +86,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -200,6 +203,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\api\CardController.cs" />
     <Compile Include="Controllers\api\EchoApiController.cs" />
     <Compile Include="Controllers\api\PersonController.cs" />
     <Compile Include="Controllers\api\ProfileController.cs" />
@@ -209,10 +213,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Domain\Card.cs" />
+    <Compile Include="Models\Domain\CardWithFile.cs" />
     <Compile Include="Models\Domain\EncodedImage.cs" />
     <Compile Include="Models\Domain\UserFile.cs" />
+    <Compile Include="Services\CardService.cs" />
     <Compile Include="Services\FileUploadService.cs" />
-    <Compile Include="Services\Interfaces\IAuthenticationService.cs" />
     <Compile Include="Models\Interfaces\IUserAuthData.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\LoginUser.cs" />
@@ -231,6 +237,7 @@
     <Compile Include="Responses\SuccessResponse.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\Cryptography\CryptographyService.cs" />
+    <Compile Include="Services\Interfaces\IAuthenticationService.cs" />
     <Compile Include="Services\OwinAuthenticationService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\Security\IIdentityExtensions.cs" />
@@ -239,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\index.html" />
+    <Content Include="app\public\createCard.html" />
     <Content Include="bower_components\angular-img-cropper\dist\angular-img-cropper.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app.public.js" />
@@ -328,9 +336,16 @@
     <Content Include="bower_components\angular-img-cropper\bower.json" />
     <Content Include="bower_components\angular-img-cropper\LICENSE.md" />
     <Content Include="bower_components\angular-img-cropper\README.md" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\create.controller.js" />
+    <Content Include="Scripts\create.service.js" />
+    <Content Include="Scripts\fileUpload.directive.js" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -383,6 +398,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
+    <Folder Include="Views\Card\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
@@ -397,7 +413,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

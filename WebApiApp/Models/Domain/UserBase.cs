@@ -19,5 +19,15 @@ namespace WebApiApp.Models.Domain
             get; set;
         }
 
+        public IEnumerable<string> Roles
+        {
+            get; set;
+        }
+
+        public bool Remember { get; set; }
+
+        public string UserType { get; set; }
+
+        public string RoleId { get; set; }
     }
 }

@@ -40,7 +40,8 @@
 
         function _login() {
             vm.userService.login(vm.loginItem)
-                .then(vm.loginSuccess).catch(vm.loginError);
+                .then(vm.loginSuccess)
+                .catch(vm.loginError);
         }
 
         function _loginSuccess(res) {

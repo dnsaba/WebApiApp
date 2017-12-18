@@ -6,6 +6,7 @@ using System.Security.Claims;
 using WebApiApp.Models.Domain;
 using WebApiApp.Models.Interfaces;
 using WebApiApp.Services.Cryptography;
+using WebApiApp.Services.Interfaces;
 
 namespace WebApiApp.Services
 {

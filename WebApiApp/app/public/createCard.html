@@ -1,0 +1,54 @@
+﻿<style>
+    .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .image1 {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .image2 {
+        position: absolute;
+        top: 82px;
+        left: 42px;
+    }
+</style>
+
+<div class="jumbotron text-center">
+    <h1>Create A Card</h1>
+</div>
+<div>
+    <div>
+        <div>
+            <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="createCtrl.cropper.sourceImage">
+            <div ng-show="createCtrl.cropper.croppedImage">
+                <canvas width="266" height="236" id="myCanvas" image-cropper image="createCtrl.cropper.sourceImage" cropped-image="createCtrl.cropper.croppedImage" crop-width="266" crop-height="236" keep-aspect="true" touch-radius="30" crop-area-bounds="createCtrl.bounds"></canvas>
+            </div>
+            <div ng-show="createCtrl.cropper.croppedImage; createCtrl.showImg"><img id="croppedImage" ng-src="{{createCtrl.cropper.croppedImage}}" /></div>
+        </div>
+    </div>
+    <!--<div>
+        <md-button class="md-button" ng-click="createCtrl.uploadFile()">Upload</md-button>
+    </div>-->
+</div>
+<div class="parent">
+    <canvas id="cardCanvas">
+
+    </canvas>
+    <!--<img class="image1" style="height:450px;width:350px" src="http://www.navilagando.com/wp-content/uploads/2017/08/Yugioh-Card-Template-7.png"/>
+    <img class="image2" style="height:236px;width:266px" ng-src="{{createCtrl.cropper.croppedImage}}"/>-->
+    <label>Name:</label>
+    <input type="text" id="cardName" ng-model="createCtrl.newcard.name"/>
+    <label>Description</label>
+    <input type="text" id="cardDes" ng-model="createCtrl.newcard.description"/>
+    <button ng-click="createCtrl.uploadFile()">Create</button>
+</div>
+<div>
+    <div ng-repeat="card in createCtrl.allCards">
+        <img />
+    </div>
+</div>
