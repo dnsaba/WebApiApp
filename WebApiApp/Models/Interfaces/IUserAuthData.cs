@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApiApp.Interfaces
+namespace WebApiApp.Models.Interfaces
 {
     public interface IUserAuthData
     {
@@ -12,3 +12,4 @@ namespace WebApiApp.Interfaces
         string Email { get; }
     }
 }
+

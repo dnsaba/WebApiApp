@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using WebApiApp.Models.Interfaces;
 
-namespace WebApiApp.Interfaces
+namespace WebApiApp.Services
 {
     public interface IAuthenticationService
     {
@@ -27,3 +23,4 @@ namespace WebApiApp.Interfaces
         IUserAuthData GetCurrentUser();
     }
 }
+

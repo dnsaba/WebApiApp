@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using WebApiApp.Interfaces;
+using System.Text;
+using System.Threading.Tasks;
+using WebApiApp.Models.Interfaces;
 
 namespace WebApiApp.Models.Domain
 {
@@ -17,5 +18,6 @@ namespace WebApiApp.Models.Domain
         {
             get; set;
         }
+
     }
 }

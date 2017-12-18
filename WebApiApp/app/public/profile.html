@@ -1,3 +1,26 @@
 ﻿<div class="jumbotron text-center">
     <h1>Profile</h1>
 </div>
+<div>
+    <h1>Create a Card</h1>
+    <div>
+        <div>
+            <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="proCtrl.cropper.sourceImage">
+            <div ng-show="proCtrl.cropper.croppedImage">
+                <canvas width="300" height="150" id="myCanvas" image-cropper image="proCtrl.cropper.sourceImage" cropped-image="proCtrl.cropper.croppedImage" crop-width="400" crop-height="200" keep-aspect="true" touch-radius="30" crop-area-bounds="proCtrl.bounds"></canvas>
+            </div>
+            <div ng-show="proCtrl.cropper.croppedImage"><img ng-src="{{proCtrl.cropper.croppedImage}}" /></div>
+        </div>
+    </div>
+    <div>
+        <md-button class="md-button" ng-click="proCtrl.uploadFile()">Upload</md-button>
+    </div>
+    <!--<h3>First Name:</h3>
+    <h3>Middle Initial:</h3>
+    <h3>Last Name:</h3>
+    <h3>Games Won:</h3>
+    <h3>Games Lost:</h3>
+    <h3>Total Games Played:</h3>
+    <h3>Display Name:</h3>
+    <button ng-click="proCtrl.editProfile()">Edit Profile</button>-->
+</div>

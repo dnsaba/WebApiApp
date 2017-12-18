@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Web;
-using WebApiApp.Interfaces;
+using WebApiApp.Models.Interfaces;
 
 namespace WebApiApp.Services
 {
@@ -42,6 +42,7 @@ namespace WebApiApp.Services
 
             AuthenticationProperties props;
 
+
             props = new AuthenticationProperties
             {
                 IsPersistent = true,
@@ -55,16 +56,17 @@ namespace WebApiApp.Services
 
         public void LogOut()
         {
-            Microsoft.Owin.IOwinContext owinContext = HttpContext.Current.Request.GetOwinContext();
+            Microsoft.Owin.IOwinContext owinContext = System.Web.HttpContext.Current.Request.GetOwinContext();
             IEnumerable<AuthenticationDescription> authenticationTypes = owinContext.Authentication.GetAuthenticationTypes();
             owinContext.Authentication.SignOut(authenticationTypes.Select(o => o.AuthenticationType).ToArray());
 
             //HttpContext.Current.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
-        public string GetCurrentUser()
+
+        public IUserAuthData GetCurrentUser()
         {
-            return HttpContext.Current.User.Identity.GetUserId();
+            return HttpContext.Current.User.Identity.GetCurrentUser();
         }
 
         private static string GetApplicationName()
@@ -80,9 +82,5 @@ namespace WebApiApp.Services
 
         }
 
-        IUserAuthData IAuthenticationService.GetCurrentUser()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

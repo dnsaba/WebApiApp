@@ -22,7 +22,8 @@
             .state('profile', {
                 name: 'profile',
                 url: '/profile',
-                templateUrl: '/app/public/profile.html'
+                templateUrl: '/app/public/profile.html',
+                controller: "profileController as proCtrl"
             })
 
             .state('duel', {

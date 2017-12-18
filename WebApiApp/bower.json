@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "font-awesome": "Font-Awesome#v4.7.0",
-    "angular": "v1.6.7"
+    "angular": "v1.6.7",
+    "angular-img-cropper": "v1.1.0"
   }
 }

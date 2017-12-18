@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Security.Claims;
-using System.Web;
-using WebApiApp.Interfaces;
 using WebApiApp.Models.Domain;
+using WebApiApp.Models.Interfaces;
 using WebApiApp.Services.Cryptography;
 
 namespace WebApiApp.Services
@@ -71,11 +68,11 @@ namespace WebApiApp.Services
             return userId;
         }
 
-        public bool LogIn(LoginUser model)
+        public bool LogIn(string email, string password)
         {
             bool isSuccessful = false;
 
-            LoginUser userData = GetSalt(model.Email);
+            LoginUser userData = GetSalt(email);
 
             if (userData != null && !String.IsNullOrEmpty(userData.Salt))
             {
@@ -85,7 +82,7 @@ namespace WebApiApp.Services
                     userData.Salt += new string('=', 4 - multOf4);
                 }
 
-                string passwordHash = cryptsvc.Hash(model.Password, userData.Salt, HASH_ITERATION_COUNT);
+                string passwordHash = cryptsvc.Hash(password, userData.Salt, HASH_ITERATION_COUNT);
 
                 IUserAuthData response = new UserBase
                 {
@@ -93,16 +90,17 @@ namespace WebApiApp.Services
                     Email = userData.Email
                 };
 
-                Claim emailClaim = new Claim(userData.Email.ToString(), "LPGallery");
+                Claim emailClaim = new Claim(userData.Email.ToString(), "WebApiApp");
                 _authenticationService.LogIn(response, new Claim[] { emailClaim });
 
-                if (model.Email == userData.Email && passwordHash == userData.HashPassword)
+                if (email == userData.Email && passwordHash == userData.HashPassword)
                 {
                     isSuccessful = true;
                 }
             }
 
             return isSuccessful;
+
         }
 
         /// The Dataprovider call to get the Salt & other data for User with the given Email

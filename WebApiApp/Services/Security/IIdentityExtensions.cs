@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using WebApiApp.Interfaces;
 using WebApiApp.Models.Domain;
+using WebApiApp.Models.Interfaces;
 
-namespace LPGallery.Services.Security
+namespace WebApiApp.Services
 {
     public static class IIdentityExtensions
     {
