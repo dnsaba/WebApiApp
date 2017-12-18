@@ -1,3 +1,27 @@
 ﻿<div class="jumbotron text-center">
     <h1>The Homey Page</h1>
 </div>
+<div>
+    <h1>Register</h1>
+    <div>
+        <form name="regForm" ng-submit="userCtrl.submitRegisterForm()" novalidate>
+            <label>Email</label>
+            <input type="email" name="email" ng-model="userCtrl.item.Email" />
+            <label>Password</label>
+            <input type="password" name="password" ng-model="userCtrl.item.BasicPass" ng-pattern="/.*[0-9].*/" ng-minlength="6" />
+            <p class="validationText" ng-show="regForm.password.$error.minlength">Minimum of 6 characters. </p>
+            <p class="validationText" ng-show="regForm.password.$error.pattern">Must include atleast 1 number. </p>
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+    <h1>Log In</h1>
+    <div>
+        <form name="loginForm" ng-submit="userCtrl.login()" novalidate>
+            <label>Email</label>
+            <input type="email" ng-model="userCtrl.loginItem.Email"/>
+            <label>Password</label>
+            <input type="password" ng-model="userCtrl.loginItem.Password"/>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+</div>

@@ -7,6 +7,8 @@ namespace WebApiApp.Responses
 {
     public class ItemResponse<T> : SuccessResponse
     {
+
         public T Item { get; set; }
+
     }
 }

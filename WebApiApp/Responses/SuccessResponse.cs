@@ -9,6 +9,7 @@ namespace WebApiApp.Responses
     {
         public SuccessResponse()
         {
+
             this.IsSuccessful = true;
         }
     }

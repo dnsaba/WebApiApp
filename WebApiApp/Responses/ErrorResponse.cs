@@ -7,7 +7,7 @@ namespace WebApiApp.Responses
 {
     public class ErrorResponse : BaseResponse
     {
-        public List<string> Errors { get; set; }
+        public List<String> Errors { get; set; }
 
         public ErrorResponse(string errMsg)
         {
@@ -17,7 +17,7 @@ namespace WebApiApp.Responses
             this.IsSuccessful = false;
         }
 
-        public ErrorResponse(IEnumerable<string> errMsg)
+        public ErrorResponse(IEnumerable<String> errMsg)
         {
             Errors = new List<string>();
 
