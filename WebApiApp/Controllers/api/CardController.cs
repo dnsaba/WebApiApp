@@ -42,7 +42,7 @@ namespace WebApiApp.Controllers.api
         }
 
         [Route("newcard"), HttpPost]
-        public HttpResponseMessage CardInsert(Card model)
+        public HttpResponseMessage CardInsert(CardWithFile model)
         {
             try
             {
@@ -92,12 +92,13 @@ namespace WebApiApp.Controllers.api
         }
 
         [Route("{id:int}"), HttpPut]
-        public HttpResponseMessage Put(int id, Card model)
+        public HttpResponseMessage Put(int id, CardWithFile model)
         {
             try
             {
                 //var user = _authService.GetCurrentUser();
                 //model.ModifiedBy = user.Id;
+                model.Id = id;
                 svc.Update(model);
                 SuccessResponse resp = new SuccessResponse();
                 return Request.CreateResponse(HttpStatusCode.OK, resp);

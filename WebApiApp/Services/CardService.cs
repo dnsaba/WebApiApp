@@ -13,7 +13,7 @@ namespace WebApiApp.Services
     {
         string sqlConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-        public int Insert(Card model)
+        public int Insert(CardWithFile model)
         {
             int id = 0;
             using (SqlConnection conn = new SqlConnection(sqlConnectionString))
@@ -25,6 +25,8 @@ namespace WebApiApp.Services
                     cmd.Parameters.AddWithValue("@FileId", model.FileId);
                     cmd.Parameters.AddWithValue("@Name", model.Name);
                     cmd.Parameters.AddWithValue("@Description", model.Description);
+                    cmd.Parameters.AddWithValue("@AttackLevel", model.AttackLevel);
+                    cmd.Parameters.AddWithValue("@DefenseLevel", model.DefenseLevel);
                     cmd.Parameters.AddWithValue("@UserId", model.UserId);
 
                     SqlParameter parm = new SqlParameter("@Id", SqlDbType.Int);
@@ -83,7 +85,7 @@ namespace WebApiApp.Services
             return model;
         }
 
-        public void Update(Card model)
+        public void Update(CardWithFile model)
         {
             using (SqlConnection conn = new SqlConnection(sqlConnectionString))
             {
@@ -92,8 +94,8 @@ namespace WebApiApp.Services
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Id", model.Id);
-                    cmd.Parameters.AddWithValue("@Name", model.Name);
-                    cmd.Parameters.AddWithValue("@Description", model.Description);
+                    cmd.Parameters.AddWithValue("@AttackLevel", model.AttackLevel);
+                    cmd.Parameters.AddWithValue("@DefenseLevel", model.DefenseLevel);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -125,6 +127,8 @@ namespace WebApiApp.Services
             model.Name = reader.GetString(index++);
             model.Description = reader.GetString(index++);
             model.UserId = reader.GetInt32(index++);
+            model.AttackLevel = reader.GetInt32(index++);
+            model.DefenseLevel = reader.GetInt32(index++);
             model.FileId = reader.GetInt32(index++);
             model.UserFileName = reader.GetString(index++);
             model.SystemFileName = reader.GetString(index++);

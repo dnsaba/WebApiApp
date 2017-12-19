@@ -12,6 +12,8 @@ namespace WebApiApp.Models.Domain
         public string Name { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
+        public int AttackLevel { get; set; }
+        public int DefenseLevel { get; set; }
         public string UserFileName { get; set; }
         public string SystemFileName { get; set; }
         public string FileLocation { get; set; }
