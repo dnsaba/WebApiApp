@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
+using System.Web;
 using WebApiApp.Models.Domain;
 using WebApiApp.Models.Interfaces;
 
-namespace WebApiApp.Services
+namespace WebApiApp.Services.Security
 {
     public static class IIdentityExtensions
     {
@@ -34,12 +35,12 @@ namespace WebApiApp.Services
             return null;
         }
 
-        public static IEnumerable<string> GetRoles(this IIdentity identity)
-        {
-            if (identity == null) { throw new ArgumentNullException("identity"); }
-            var ci = identity as ClaimsIdentity;
-            return ci.FindAll(ci.RoleClaimType).Select(c => c.Value);
-        }
+        //public static IEnumerable<string> GetRoles(this IIdentity identity)
+        //{
+        //    if (identity == null) { throw new ArgumentNullException("identity"); }
+        //    var ci = identity as ClaimsIdentity;
+        //    return ci.FindAll(ci.RoleClaimType).Select(c => c.Value);
+        //}
 
         // Thin wrapper.
         public static Claim FindFirst(this IIdentity identity, string claimType)
@@ -52,7 +53,7 @@ namespace WebApiApp.Services
 
         public static IUserAuthData GetCurrentUser(this IIdentity identity)
         {
-            UserBase baseUser = null;
+            WebApiApp.Models.Domain.UserBase baseUser = null;
 
             if (identity == null) { throw new ArgumentNullException("identity"); }
 
@@ -72,7 +73,8 @@ namespace WebApiApp.Services
 
         private static UserBase ExtractUser(ClaimsIdentity identity)
         {
-           UserBase baseUser = new WebApiApp.Models.Domain.UserBase();
+            WebApiApp.Models.Domain.UserBase baseUser = new Models.Domain.UserBase();
+           
 
             foreach (var claim in identity.Claims)
             {

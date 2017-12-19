@@ -1,0 +1,83 @@
+﻿<style>
+    .parent {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .image1 {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .image2 {
+        position: absolute;
+        top: 82px;
+        left: 42px;
+    }
+
+    #allCards {
+        top: 50px;
+    }
+</style>
+
+<div>
+    <button ng-click="createCtrl.creating=true">Create New Card</button>
+</div>
+<div class="parent" ng-show="createCtrl.creating">
+    <div>
+        <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="createCtrl.cropper.sourceImage">
+        <div ng-show="createCtrl.cropper.croppedImage">
+            <canvas width="266" height="236" id="myCanvas" image-cropper image="createCtrl.cropper.sourceImage" cropped-image="createCtrl.cropper.croppedImage" crop-width="266" crop-height="236" keep-aspect="true" touch-radius="30" crop-area-bounds="createCtrl.bounds"></canvas>
+        </div>
+        <div ng-show="createCtrl.cropper.croppedImage; createCtrl.showImg"><img id="croppedImage" ng-src="{{createCtrl.cropper.croppedImage}}" /></div>
+    </div>
+    <canvas id="cardCanvas"></canvas>
+    <label>Name:</label>
+    <input type="text" id="cardName" ng-model="createCtrl.newcard.name" />
+    <label>Card Type</label>
+    <input type="text" id="cardDes" ng-model="createCtrl.newcard.description" />
+    <label>Attack Level</label>
+    <input type="number" ng-model="createCtrl.newcard.attackLevel" />
+    <label>Defense Level</label>
+    <input type="number" ng-model="createCtrl.newcard.defenseLevel" />
+    <button ng-click="createCtrl.uploadFile()">Create</button>
+</div>
+<div id="allCards">
+    <div ng-repeat="card in createCtrl.allCards">
+        <img src="/images/{{card.systemFileName}}" />
+        <p>Attack Level: {{card.attackLevel}}</p>
+        <p>Defense Level: {{card.defenseLevel}}</p>
+        <button data-toggle="modal" data-target="#myModal" ng-click="createCtrl.editId=card.id">Edit</button>
+        <button ng-click="createCtrl.deleteCard(card.id)">Delete</button>
+        <br />
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <md-button class="close myClose md-button" data-dismiss="modal">&times;</md-button>
+                <h4 class="modal-title">Edit Card</h4>
+            </div>
+            <div class="modal-body">
+                <form name="createCtrl.editForm" novalidate>
+                    <label>Attack Level</label>
+                    <input type="number" ng-model="createCtrl.editItem.attackLevel" />
+                    <br>
+                    <label>Defense Level</label>
+                    <input ng-model="createCtrl.editItem.defenseLevel" />
+                    <div class="modal-footer">
+                        <md-button class="md-button" ng-click="createCtrl.editCard()">Submit Edit</md-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

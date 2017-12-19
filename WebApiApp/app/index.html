@@ -11,8 +11,10 @@
     </style>
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="/Scripts/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
     <script src="/Scripts/app.js"></script>
     <script src="/Scripts/app.public.js"></script>
@@ -20,10 +22,11 @@
     <!-- CONTROLLERS -->
     <script src="/Scripts/user.service.js"></script>
     <script src="/Scripts/profile.service.js"></script>
+    <script src="/Scripts/create.service.js"></script>
     <!-- SERVICES -->
     <script src="/Scripts/user.controller.js"></script>
     <script src="/Scripts/profile.controller.js"></script>
-
+    <script src="/Scripts/create.controller.js"></script>
 
 </head>
 
@@ -39,6 +42,7 @@
             <ul class="nav navbar-nav">
                 <li><a ui-sref="home">Home</a></li>
                 <li><a ui-sref="profile">Profile</a></li>
+                <li><a ui-sref="create">Create Card</a></li>
                 <li><a href="duel">New Game</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

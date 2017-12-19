@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Web;
 using WebApiApp.Models.Interfaces;
+using WebApiApp.Services.Interfaces;
+using WebApiApp.Services.Security;
 
 namespace WebApiApp.Services
 {
@@ -41,7 +43,6 @@ namespace WebApiApp.Services
             identity.AddClaims(extraClaims);
 
             AuthenticationProperties props;
-
 
             props = new AuthenticationProperties
             {
@@ -81,6 +82,5 @@ namespace WebApiApp.Services
             return titleAttribute == null ? entryAssembly.GetName().Name : titleAttribute.Title;
 
         }
-
     }
 }

@@ -30,6 +30,13 @@
                 name: 'duel',
                 url: '/duel',
                 templateUrl: '/app/public/duel.html'
+            })
+
+            .state('create', {
+                name: 'create',
+                url: '/create',
+                templateUrl: '/app/public/createCard.html',
+                controller: "createController as createCtrl"
             });
 
     });

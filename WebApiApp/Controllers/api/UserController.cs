@@ -5,6 +5,7 @@ using System.Web.Http;
 using WebApiApp.Models.Domain;
 using WebApiApp.Responses;
 using WebApiApp.Services;
+using WebApiApp.Services.Interfaces;
 
 namespace WebApiApp.Controllers.api
 {
