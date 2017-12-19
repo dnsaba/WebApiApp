@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.6.8.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.6.8\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -207,6 +210,7 @@
     <Compile Include="Controllers\api\EchoApiController.cs" />
     <Compile Include="Controllers\api\PersonController.cs" />
     <Compile Include="Controllers\api\ProfileController.cs" />
+    <Compile Include="Controllers\api\UrlDataController.cs" />
     <Compile Include="Controllers\api\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -216,6 +220,8 @@
     <Compile Include="Models\Domain\Card.cs" />
     <Compile Include="Models\Domain\CardWithFile.cs" />
     <Compile Include="Models\Domain\EncodedImage.cs" />
+    <Compile Include="Models\Domain\UrlData.cs" />
+    <Compile Include="Models\Domain\Urls.cs" />
     <Compile Include="Models\Domain\UserFile.cs" />
     <Compile Include="Services\CardService.cs" />
     <Compile Include="Services\FileUploadService.cs" />
@@ -241,6 +247,7 @@
     <Compile Include="Services\OwinAuthenticationService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\Security\IIdentityExtensions.cs" />
+    <Compile Include="Services\UrlDataService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -401,6 +408,7 @@
     <Folder Include="Views\Card\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Register\" />
+    <Folder Include="Views\UrlData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
