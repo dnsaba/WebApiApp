@@ -23,6 +23,7 @@
         vm.bounds.top = 0;
         vm.bounds.bottom = 0;
         vm.newcard = {};
+        vm.comboCard;
         vm.editItem = {};
         vm.editId = null;
         vm.cardList;
@@ -30,6 +31,7 @@
         vm.urlData = {
             url: ""
         };
+        vm.deleteFileData = {};
 
         vm.$onInit = _onInit;
         vm.selectAllCards = _selectAllCards;
@@ -53,6 +55,9 @@
         vm.getUrlData = _getUrlData;
         vm.getUrlDataSuccess = _getUrlDataSuccess;
         vm.getUrlDataError = _getUrlDataError;
+        vm.deleteFile = _deleteFile;
+        vm.deleteFileSuccess = _deleteFileSuccess;
+        vm.deleteFileError = _deleteFileError;
 
         function _onInit() {
             vm.selectAllCards();
@@ -135,6 +140,7 @@
         }
 
         function _selectAllCardsSuccess(res) {
+            vm.allCards = [];
             var list = res.data.items;
             for (var i = 0; i < list.length; i++) {
 
@@ -159,7 +165,6 @@
 
             vm.createService.uploadFile(vm.uploadImage)
                 .then(vm.uploadFileSuccess).catch(vm.uploadFileError);
-
         }
 
         function _uploadFileSuccess(res) {
@@ -174,6 +179,9 @@
         }
 
         function _createCard() {
+            vm.newcard.cardCombo = vm.comboCard.name;
+            vm.newcard.cardComboAtk = vm.comboCard.attackLevel;
+            vm.newcard.cardComboDef = vm.comboCard.defenseLevel;
             vm.createService.createCard(vm.newcard)
                 .then(vm.createCardSuccess).catch(vm.createCardError);
         }
@@ -186,22 +194,25 @@
             vm.cropper.croppedImage = null;
             $("#fileUploadInput").val(null);
             vm.drawBase("/images/cardtemp.jpg");
+            vm.selectAllCards();
         }
 
         function _createCardError(err) {
             console.log(err);
         }
 
-
         function _editCard() {
-            console.log(vm.editId);
-            console.log(vm.editItem);
+            vm.editItem.cardCombo = vm.comboCard.name;
+            vm.editItem.cardComboAtk = vm.comboCard.attackLevel;
+            vm.editItem.cardComboDef = vm.comboCard.defenseLevel;
             vm.createService.update(vm.editId, vm.editItem)
                 .then(vm.editCardSuccess).catch(vm.editCardError);
         }
 
         function _editCardSuccess(res) {
             console.log(res);
+            vm.editItem = {};
+            vm.selectAllCards();
         }
 
         function _editCardError(err) {
@@ -210,16 +221,34 @@
             vm.editItem = {};
         }
 
-        function _deleteCard(id) {
-            vm.createService.delete(id)
+        function _deleteCard(card) {
+            vm.deleteFileData.id = card.fileId;
+            vm.deleteFileData.systemFileName = card.systemFileName;
+            vm.createService.delete(card.id)
                 .then(vm.deleteCardSuccess).catch(vm.deleteCardError);
         }
 
         function _deleteCardSuccess(res) {
             console.log(res);
+            vm.deleteFile(vm.deleteFileData);
+            vm.selectAllCards();
         }
 
         function _deleteCardError(err) {
+            console.log(err);
+        }
+
+        function _deleteFile(data) {
+            vm.createService.deleteFile(data)
+                .then(vm.deleteFileSuccess).catch(vm.deleteFileError);
+        }
+
+        function _deleteFileSuccess(res) {
+            console.log(res);
+            vm.deleteFile = {};
+        }
+
+        function _deleteFileError(err) {
             console.log(err);
         }
 

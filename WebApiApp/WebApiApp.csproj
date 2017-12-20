@@ -221,6 +221,7 @@
     <Compile Include="Models\Domain\Card.cs" />
     <Compile Include="Models\Domain\CardWithFile.cs" />
     <Compile Include="Models\Domain\Deck.cs" />
+    <Compile Include="Models\Domain\DeleteFile.cs" />
     <Compile Include="Models\Domain\EncodedImage.cs" />
     <Compile Include="Models\Domain\UrlData.cs" />
     <Compile Include="Models\Domain\Urls.cs" />

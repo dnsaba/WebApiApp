@@ -14,7 +14,8 @@
             selectById: _selectById,
             update: _update,
             delete: _delete,
-            getUrlData: _getUrlData
+            getUrlData: _getUrlData,
+            deleteFile: _deleteFile
         };
 
         function _uploadFile(file) {
@@ -50,6 +51,17 @@
         function _getUrlData(data) {
             return $http.post("/api/urlData/get", data, { withCredentials: true })
                 .then(success).catch(error);
+        }
+
+        function _deleteFile(data) {
+            return $http.delete("/api/create/fileDelete",
+                {
+                    data,
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8"
+                    }
+                }
+            ).then(success).catch(error);
         }
 
         function success(res) {
