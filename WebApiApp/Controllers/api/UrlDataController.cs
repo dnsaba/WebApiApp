@@ -13,7 +13,7 @@ namespace WebApiApp.Controllers.api
     {
         UrlDataService svc = new UrlDataService();
 
-        [Route("get2"), HttpPost]
+        [Route("get"), HttpPost]
         [AllowAnonymous]
         public HttpResponseMessage Get2(Urls model)
         {

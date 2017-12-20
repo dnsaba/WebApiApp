@@ -25,7 +25,64 @@
 <div>
     <button ng-click="createCtrl.creating=true">Create New Card</button>
 </div>
-<div class="parent" ng-show="createCtrl.creating">
+<div class="row" ng-show="createCtrl.creating">
+    <div class="col-sm-4">
+        <div class="item_holder">
+            <div>
+                <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="createCtrl.cropper.sourceImage">
+                <div ng-show="createCtrl.cropper.croppedImage">
+                    <canvas width="266" height="236" id="myCanvas" image-cropper image="createCtrl.cropper.sourceImage" cropped-image="createCtrl.cropper.croppedImage" crop-width="266" crop-height="236" keep-aspect="true" touch-radius="30" crop-area-bounds="createCtrl.bounds"></canvas>
+                </div>
+                <div ng-show="createCtrl.cropper.croppedImage; createCtrl.showImg"><img id="croppedImage" ng-src="{{createCtrl.cropper.croppedImage}}" /></div>
+            </div>
+            <canvas id="cardCanvas"></canvas>
+        </div> <!--item holder-->
+    </div> <!--col end-->
+    <div class="col-md-offset-1">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>Custom Card Form</legend>
+                <div class="form-group">
+                    <label class="control-label" for=""></label>
+                    <div >
+                        <input name="" type="text" placeholder="Card Name" class="form-control input-md" id="cardName" ng-model="createCtrl.newcard.name">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for=""></label>
+                    <div>
+                        <input name="" type="text" placeholder="Card Type" class="form-control input-md" id="cardDes" ng-model="createCtrl.newcard.description">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for=""></label>
+                    <div>
+                        <input id="" name="" type="text" placeholder="Attack Level" class="form-control input-md" ng-model="createCtrl.newcard.attackLevel">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="ontrol-label" for=""></label>
+                    <div>
+                        <input id="" name="" type="text" placeholder="Defense Level" class="form-control input-md" ng-model="createCtrl.newcard.defenseLevel">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="createCtrl.uploadFile()">Create</button>
+                    </div>
+                </div>
+
+
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+<!--<div class="parent" ng-show="createCtrl.creating">
     <div>
         <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="createCtrl.cropper.sourceImage">
         <div ng-show="createCtrl.cropper.croppedImage">
@@ -43,8 +100,20 @@
     <label>Defense Level</label>
     <input type="number" ng-model="createCtrl.newcard.defenseLevel" />
     <button ng-click="createCtrl.uploadFile()">Create</button>
+</div>-->
+<div class="row">
+    <div class="col-sm-4" ng-repeat="card in createCtrl.allCards">
+        <div class="item_holder">
+            <img src="/images/{{card.systemFileName}}" />
+            <p>Attack Level: {{card.attackLevel}}</p>
+            <p>Defense Level: {{card.defenseLevel}}</p>
+            <button data-toggle="modal" data-target="#myModal" ng-click="createCtrl.editId=card.id">Edit</button>
+            <button ng-click="createCtrl.deleteCard(card.id)">Delete</button>
+            <br />
+        </div> <!--item holder-->
+    </div> <!--col end-->
 </div>
-<div id="allCards">
+<!--<div id="allCards">
     <div ng-repeat="card in createCtrl.allCards">
         <img src="/images/{{card.systemFileName}}" />
         <p>Attack Level: {{card.attackLevel}}</p>
@@ -53,7 +122,7 @@
         <button ng-click="createCtrl.deleteCard(card.id)">Delete</button>
         <br />
     </div>
-</div>
+</div>-->
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">

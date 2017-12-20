@@ -254,6 +254,7 @@
   <ItemGroup>
     <Content Include="app\index.html" />
     <Content Include="app\public\createCard.html" />
+    <Content Include="app\public\decks.html" />
     <Content Include="bower_components\angular-img-cropper\dist\angular-img-cropper.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app.public.js" />
@@ -345,6 +346,8 @@
     <Content Include="bower_components\angular-img-cropper\README.md" />
     <Content Include="Scripts\create.controller.js" />
     <Content Include="Scripts\create.service.js" />
+    <Content Include="Scripts\deck.controller.js" />
+    <Content Include="Scripts\deck.service.js" />
     <Content Include="Scripts\fileUpload.directive.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
