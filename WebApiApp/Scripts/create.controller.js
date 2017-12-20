@@ -25,6 +25,11 @@
         vm.newcard = {};
         vm.editItem = {};
         vm.editId = null;
+        vm.cardList;
+        vm.databaseCards = [];
+        vm.urlData = {
+            url: ""
+        };
 
         vm.$onInit = _onInit;
         vm.selectAllCards = _selectAllCards;
@@ -45,6 +50,9 @@
         vm.deleteCard = _deleteCard;
         vm.deleteCardSuccess = _deleteCardSuccess;
         vm.deleteCardError = _deleteCardError;
+        vm.getUrlData = _getUrlData;
+        vm.getUrlDataSuccess = _getUrlDataSuccess;
+        vm.getUrlDataError = _getUrlDataError;
 
         function _onInit() {
             vm.selectAllCards();
@@ -212,6 +220,30 @@
         }
 
         function _deleteCardError(err) {
+            console.log(err);
+        }
+
+        function _getUrlData() {
+            if (vm.cardlist === '1') {
+                vm.urlData.url = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&pid=13301000&rp=99999";
+            } else if (vm.cardlist === '2') {
+                vm.urlData.url = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&pid=11115001&rp=99999";
+            } else if (vm.cardlist === '3') {
+                vm.urlData.url = "https://www.db.yugioh-card.com/yugiohdb/card_search.action?ope=1&sess=1&pid=16611000&rp=99999";
+            }
+            vm.createService.getUrlData(vm.urlData)
+                .then(vm.getUrlDataSuccess).catch(vm.getUrlDataError);
+        }
+
+        function _getUrlDataSuccess(res) {
+            console.log(res);
+            vm.databaseCards = res.data.item.cardsInfo;
+            for (var i = 0; i < vm.databaseCards.length; i++) {
+                vm.databaseCards[i].Selected = false;
+            }
+        }
+
+        function _getUrlDataError(err) {
             console.log(err);
         }
     }

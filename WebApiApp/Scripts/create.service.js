@@ -13,7 +13,8 @@
             selectAll: _selectAll,
             selectById: _selectById,
             update: _update,
-            delete: _delete
+            delete: _delete,
+            getUrlData: _getUrlData
         };
 
         function _uploadFile(file) {
@@ -43,6 +44,11 @@
 
         function _delete(id) {
             return $http.delete("/api/create/" + id, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _getUrlData(data) {
+            return $http.post("/api/urlData/get", data, { withCredentials: true })
                 .then(success).catch(error);
         }
 

@@ -44,7 +44,7 @@
                 <legend>Custom Card Form</legend>
                 <div class="form-group">
                     <label class="control-label" for=""></label>
-                    <div >
+                    <div>
                         <input name="" type="text" placeholder="Card Name" class="form-control input-md" id="cardName" ng-model="createCtrl.newcard.name">
 
                     </div>
@@ -68,6 +68,26 @@
                     <div>
                         <input id="" name="" type="text" placeholder="Defense Level" class="form-control input-md" ng-model="createCtrl.newcard.defenseLevel">
 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasic">select a card list</label>
+                    <div class="col-md-4">
+                        <select id="selectbasic" name="selectbasic" class="form-control" ng-model="createCtrl.cardlist" ng-change="createCtrl.getUrlData()">
+                            <option value="1">Card List 1</option>
+                            <option value="2">Card List 2</option>
+                            <option value="3">Card List 3</option>
+                        </select>
+                        <!-- <button id="" name="" class="btn btn-primary" ng-click="createCtrl.getUrlData()">Select</button> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for=""></label>
+                    <div class="col-md-4">
+                        <select name="category" ng-model="createCtrl.newCard.comboCard">
+                            <option ng-repeat="option in createCtrl.databaseCards" ng-value="option.name">{{option.name}}</option>
+                        </select>
+                        
                     </div>
                 </div>
                 <div class="form-group">

@@ -3,13 +3,31 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-4" ng-repeat="card in decksCtrl.allCards">
+    <h3>Select a card list</h3>
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="selectbasic"></label>
+        <div class="col-md-4">
+            <select id="selectbasic" name="selectbasic" class="form-control" ng-model="decksCtrl.cardlist">
+                <option value="1">Card List 1</option>
+                <option value="2">Card List 2</option>
+                <option value="3">Card List 3</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label" for=""></label>
+        <div class="col-md-4">
+            <button id="" name="" class="btn btn-primary" ng-click="decksCtrl.getUrlData()">Select</button>
+        </div>
+    </div>
+    <div class="col-sm-4" ng-repeat="card in decksCtrl.databaseCards">
         <div class="item_holder">
             <p>Card Name: {{card.name}}</p>
-            <p>Description: {{card.description}}</p>
             <p>Attack Level: {{card.attackLevel}}</p>
             <p>Defense Level: {{card.defenseLevel}}</p>
-            <input id="checkBox" type="checkbox">
+            <input type="checkbox" value="{{card.name}}" ng-model="card.Selected">
         </div> <!--item holder-->
     </div> <!--col end-->
+    <button ng-click="decksCtrl.selectedCards()">Add Cards</button>
+    <button ng-click="decksCtrl.createDeck()">Create Deck</button>
 </div>

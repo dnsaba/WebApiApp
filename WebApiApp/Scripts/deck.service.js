@@ -2,17 +2,23 @@
     "use strict";
     angular
         .module("routerApp")
-        .factory("decksService", Deckservice);
+        .factory("decksService", DecksService);
 
     DecksService.$inject = ["$http", "$q"];
 
     function DecksService($http, $q) {
         return {
-            getUrlData: _getUrlData
+            getUrlData: _getUrlData,
+            createDeck: _createDeck
         };
 
         function _getUrlData(data) {
             return $http.post("/api/urlData/get", data, { withCredentials: true })
+                .then(success).catch(error);
+        }
+
+        function _createDeck(data) {
+            return $http.post("/api/decks", data, { withCredentials: true })
                 .then(success).catch(error);
         }
 

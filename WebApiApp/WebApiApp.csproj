@@ -207,6 +207,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\CardController.cs" />
+    <Compile Include="Controllers\api\DeckController.cs" />
     <Compile Include="Controllers\api\EchoApiController.cs" />
     <Compile Include="Controllers\api\PersonController.cs" />
     <Compile Include="Controllers\api\ProfileController.cs" />
@@ -219,11 +220,13 @@
     </Compile>
     <Compile Include="Models\Domain\Card.cs" />
     <Compile Include="Models\Domain\CardWithFile.cs" />
+    <Compile Include="Models\Domain\Deck.cs" />
     <Compile Include="Models\Domain\EncodedImage.cs" />
     <Compile Include="Models\Domain\UrlData.cs" />
     <Compile Include="Models\Domain\Urls.cs" />
     <Compile Include="Models\Domain\UserFile.cs" />
     <Compile Include="Services\CardService.cs" />
+    <Compile Include="Services\DeckService.cs" />
     <Compile Include="Services\FileUploadService.cs" />
     <Compile Include="Models\Interfaces\IUserAuthData.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -409,6 +412,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
     <Folder Include="Views\Card\" />
+    <Folder Include="Views\Deck\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="Views\Register\" />
     <Folder Include="Views\UrlData\" />

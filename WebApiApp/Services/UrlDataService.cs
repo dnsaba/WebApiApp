@@ -33,13 +33,13 @@ namespace WebApiApp.Services
                     cardNamesList.Add(name);
                 }
 
-                List<string> cardDescriptions = new List<string>();
-                var xpath2 = "//dd[@class='box_card_text']";
-                foreach (HtmlNode a in document.DocumentNode.SelectNodes(xpath2))
-                {
-                    string des = a.InnerHtml;
-                    cardDescriptions.Add(des);
-                }
+                //List<string> cardDescriptions = new List<string>();
+                //var xpath2 = "//dd[@class='box_card_text']";
+                //foreach (HtmlNode a in document.DocumentNode.SelectNodes(xpath2))
+                //{
+                //    string des = a.InnerHtml;
+                //    cardDescriptions.Add(des);
+                //}
 
                 var xpath3 = "//span[@class='atk_power']";
                 List<int> attacks = new List<int>();
@@ -61,7 +61,7 @@ namespace WebApiApp.Services
                 {
                     Card cmodel = new Card();
                     cmodel.Name = cardNamesList[i];
-                    cmodel.Description = cardDescriptions[i];
+                    //cmodel.Description = cardDescriptions[i];
                     cmodel.AttackLevel = attacks[i];
                     cmodel.DefenseLevel = def[i];
                     model.CardsInfo.Add(cmodel);
