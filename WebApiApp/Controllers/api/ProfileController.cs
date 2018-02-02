@@ -24,7 +24,6 @@ namespace WebApiApp.Controllers.api
                 model.UserFileName = "appimg";
                 model.ByteArray = newBytes;
                 model.Extension = encodedImage.FileExtension;
-                model.SaveLocation = "GalleryImages";
                 model.UserId = 1;
 
                 int fileId = filesvc.Insert(model);

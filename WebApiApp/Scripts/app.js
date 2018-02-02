@@ -37,6 +37,13 @@
                 url: '/create',
                 templateUrl: '/app/public/createCard.html',
                 controller: "createController as createCtrl"
+            })
+
+            .state('decks', {
+                name: 'decks',
+                url: '/decks',
+                templateUrl: '/app/public/decks.html',
+                controller: "decksController as decksCtrl"
             });
 
     });

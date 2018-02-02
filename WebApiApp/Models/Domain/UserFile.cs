@@ -6,6 +6,5 @@
         public byte[] ByteArray { get; set; }
         public string UserFileName { get; set; }
         public string Extension { get; set; }
-        public string SaveLocation { get; set; }
     }
 }

@@ -1,59 +1,110 @@
 ﻿<style>
-    .parent {
-        position: relative;
-        top: 0;
-        left: 0;
+    #editDD1 {
+        width: 150px;
     }
 
-    .image1 {
-        position: relative;
-        top: 0;
-        left: 0;
-    }
-
-    .image2 {
-        position: absolute;
-        top: 82px;
-        left: 42px;
-    }
-
-    #allCards {
-        top: 50px;
+    #editDD1 option {
+        width: 150px;
     }
 </style>
 
 <div>
     <button ng-click="createCtrl.creating=true">Create New Card</button>
 </div>
-<div class="parent" ng-show="createCtrl.creating">
-    <div>
-        <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="createCtrl.cropper.sourceImage">
-        <div ng-show="createCtrl.cropper.croppedImage">
-            <canvas width="266" height="236" id="myCanvas" image-cropper image="createCtrl.cropper.sourceImage" cropped-image="createCtrl.cropper.croppedImage" crop-width="266" crop-height="236" keep-aspect="true" touch-radius="30" crop-area-bounds="createCtrl.bounds"></canvas>
-        </div>
-        <div ng-show="createCtrl.cropper.croppedImage; createCtrl.showImg"><img id="croppedImage" ng-src="{{createCtrl.cropper.croppedImage}}" /></div>
+<div class="row" ng-show="createCtrl.creating">
+    <div class="col-sm-4">
+        <div class="item_holder">
+            <div>
+                <input type="file" name="file" id="fileUploadInput" img-cropper-fileread image="createCtrl.cropper.sourceImage">
+                <div ng-show="createCtrl.cropper.croppedImage">
+                    <canvas width="266" height="236" id="myCanvas" image-cropper image="createCtrl.cropper.sourceImage" cropped-image="createCtrl.cropper.croppedImage" crop-width="266" crop-height="236" keep-aspect="true" touch-radius="30" crop-area-bounds="createCtrl.bounds"></canvas>
+                </div>
+                <div ng-show="createCtrl.cropper.croppedImage; createCtrl.showImg"><img id="croppedImage" ng-src="{{createCtrl.cropper.croppedImage}}" /></div>
+            </div>
+            <canvas id="cardCanvas"></canvas>
+        </div> <!--item holder-->
+    </div> <!--col end-->
+    <div class="col-md-offset-1">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>Custom Card Form</legend>
+                <div class="form-group">
+                    <label class="control-label" for=""></label>
+                    <div>
+                        <input name="" type="text" placeholder="Card Name" class="form-control input-md" id="cardName" ng-model="createCtrl.newcard.name">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for=""></label>
+                    <div>
+                        <input name="" type="text" placeholder="Card Type" class="form-control input-md" id="cardDes" ng-model="createCtrl.newcard.description">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for=""></label>
+                    <div>
+                        <input id="" name="" type="text" placeholder="Attack Level" class="form-control input-md" ng-model="createCtrl.newcard.attackLevel">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="ontrol-label" for=""></label>
+                    <div>
+                        <input id="" name="" type="text" placeholder="Defense Level" class="form-control input-md" ng-model="createCtrl.newcard.defenseLevel">
+
+                    </div>
+                </div>
+                <div class="form-group newCardCombo" style="margin-right:350px">
+                    <label class="col-md-4 control-label" for="selectbasic" style="margin-left:-30px">Select Card List</label>
+                    <div class="col-md-4">
+                        <select id="selectbasic" name="selectbasic" class="form-control" ng-model="createCtrl.cardlist" ng-change="createCtrl.getUrlData()">
+                            <option value="1">Card List 1</option>
+                            <option value="2">Card List 2</option>
+                            <option value="3">Card List 3</option>
+                        </select>
+                        <!-- <button id="" name="" class="btn btn-primary" ng-click="createCtrl.getUrlData()">Select</button> -->
+                    </div>
+                </div>
+                <div class="form-group newCardCombo" style="margin-right:350px">
+                    <label class="col-md-4 control-label" for="" style="margin-left:-50px;margin-right:20px">Combo Card</label>
+                    <div class="col-md-4">
+                        <select name="category" ng-model="createCtrl.comboCard">
+                            <option ng-repeat="option in createCtrl.databaseCards" ng-value="option">{{option.name}}</option>
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="createCtrl.uploadFile()">Create</button>
+                    </div>
+                </div>
+
+
+            </fieldset>
+        </form>
+
     </div>
-    <canvas id="cardCanvas"></canvas>
-    <label>Name:</label>
-    <input type="text" id="cardName" ng-model="createCtrl.newcard.name" />
-    <label>Card Type</label>
-    <input type="text" id="cardDes" ng-model="createCtrl.newcard.description" />
-    <label>Attack Level</label>
-    <input type="number" ng-model="createCtrl.newcard.attackLevel" />
-    <label>Defense Level</label>
-    <input type="number" ng-model="createCtrl.newcard.defenseLevel" />
-    <button ng-click="createCtrl.uploadFile()">Create</button>
 </div>
-<div id="allCards">
-    <div ng-repeat="card in createCtrl.allCards">
-        <img src="/images/{{card.systemFileName}}" />
-        <p>Attack Level: {{card.attackLevel}}</p>
-        <p>Defense Level: {{card.defenseLevel}}</p>
-        <button data-toggle="modal" data-target="#myModal" ng-click="createCtrl.editId=card.id">Edit</button>
-        <button ng-click="createCtrl.deleteCard(card.id)">Delete</button>
-        <br />
-    </div>
+
+<div class="row">
+    <div class="col-sm-4" ng-repeat="card in createCtrl.allCards">
+        <div class="item_holder">
+            <img src="/images/{{card.systemFileName}}" />
+            <p>Attack Level: {{card.attackLevel}}</p>
+            <p>Defense Level: {{card.defenseLevel}}</p>
+            <p>Combo Card: {{card.cardCombo}}</p>
+            <p>Combo Card Attack Level: {{card.cardComboAtk}}</p>
+            <p>Combo Card Defense Level: {{card.cardComboDef}}</p>
+            <button data-toggle="modal" data-target="#myModal" ng-click="createCtrl.editId=card.id">Edit</button>
+            <button ng-click="createCtrl.deleteCard(card)">Delete</button>
+            <br />
+        </div> <!--item holder-->
+    </div> <!--col end-->
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -72,6 +123,16 @@
                     <br>
                     <label>Defense Level</label>
                     <input ng-model="createCtrl.editItem.defenseLevel" />
+                    <br />
+                    <label>Combo Card</label>
+                    <select id="editDD1" name="selectbasic" class="form-control" ng-model="createCtrl.cardlist" ng-change="createCtrl.getUrlData()">
+                        <option value="1">Card List 1</option>
+                        <option value="2">Card List 2</option>
+                        <option value="3">Card List 3</option>
+                    </select>
+                    <select name="category" ng-model="createCtrl.comboCard">
+                        <option ng-repeat="option in createCtrl.databaseCards" ng-value="option">{{option.name}}</option>
+                    </select>
                     <div class="modal-footer">
                         <md-button class="md-button" ng-click="createCtrl.editCard()">Submit Edit</md-button>
                     </div>

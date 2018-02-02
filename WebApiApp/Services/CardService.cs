@@ -28,6 +28,9 @@ namespace WebApiApp.Services
                     cmd.Parameters.AddWithValue("@AttackLevel", model.AttackLevel);
                     cmd.Parameters.AddWithValue("@DefenseLevel", model.DefenseLevel);
                     cmd.Parameters.AddWithValue("@UserId", model.UserId);
+                    cmd.Parameters.AddWithValue("@CardCombo", model.CardCombo);
+                    cmd.Parameters.AddWithValue("@CardComboAtk", model.CardComboAtk);
+                    cmd.Parameters.AddWithValue("@CardComboDef", model.CardComboDef);
 
                     SqlParameter parm = new SqlParameter("@Id", SqlDbType.Int);
                     parm.Direction = ParameterDirection.Output;
@@ -96,6 +99,9 @@ namespace WebApiApp.Services
                     cmd.Parameters.AddWithValue("@Id", model.Id);
                     cmd.Parameters.AddWithValue("@AttackLevel", model.AttackLevel);
                     cmd.Parameters.AddWithValue("@DefenseLevel", model.DefenseLevel);
+                    cmd.Parameters.AddWithValue("@CardCombo", model.CardCombo);
+                    cmd.Parameters.AddWithValue("@CardComboAtk", model.CardComboAtk);
+                    cmd.Parameters.AddWithValue("@CardComboDef", model.CardComboDef);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -126,13 +132,22 @@ namespace WebApiApp.Services
             model.Id = reader.GetInt32(index++);
             model.Name = reader.GetString(index++);
             model.Description = reader.GetString(index++);
-            model.UserId = reader.GetInt32(index++);
+            if (!reader.IsDBNull(index))
+            {
+                model.UserId = reader.GetInt32(index++);
+            }
+            else
+            {
+                index++;
+            }
             model.AttackLevel = reader.GetInt32(index++);
             model.DefenseLevel = reader.GetInt32(index++);
+            model.CardCombo = reader.GetString(index++);
+            model.CardComboAtk = reader.GetInt32(index++);
+            model.CardComboDef = reader.GetInt32(index++);
             model.FileId = reader.GetInt32(index++);
             model.UserFileName = reader.GetString(index++);
             model.SystemFileName = reader.GetString(index++);
-            model.FileLocation = reader.GetString(index++);
             model.FileUserId = reader.GetInt32(index++);
 
             return model;

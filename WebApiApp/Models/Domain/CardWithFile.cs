@@ -16,7 +16,9 @@ namespace WebApiApp.Models.Domain
         public int DefenseLevel { get; set; }
         public string UserFileName { get; set; }
         public string SystemFileName { get; set; }
-        public string FileLocation { get; set; }
         public int FileUserId { get; set; }
+        public string CardCombo { get; set; }
+        public int CardComboAtk { get; set; }
+        public int CardComboDef { get; set; }
     }
 }

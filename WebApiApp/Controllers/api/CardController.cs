@@ -25,7 +25,6 @@ namespace WebApiApp.Controllers.api
                 model.UserFileName = "appimg";
                 model.ByteArray = newBytes;
                 model.Extension = encodedImage.FileExtension;
-                model.SaveLocation = "GalleryImages";
                 model.UserId = 1;
 
                 int fileId = filesvc.Insert(model);
@@ -100,6 +99,22 @@ namespace WebApiApp.Controllers.api
                 //model.ModifiedBy = user.Id;
                 model.Id = id;
                 svc.Update(model);
+                SuccessResponse resp = new SuccessResponse();
+                return Request.CreateResponse(HttpStatusCode.OK, resp);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [Route("fileDelete"), HttpDelete]
+        public HttpResponseMessage DeleteFile(DeleteFile model)
+        {
+            try
+            {
+                string path = "C:/repos/github/WebApiApp/WebApiApp/images/" + model.SystemFileName;
+                filesvc.DeleteFile(path, model.FileId);
                 SuccessResponse resp = new SuccessResponse();
                 return Request.CreateResponse(HttpStatusCode.OK, resp);
             }

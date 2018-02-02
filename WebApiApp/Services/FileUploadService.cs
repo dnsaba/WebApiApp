@@ -28,7 +28,7 @@ namespace WebApiApp.Services
                     Guid.NewGuid().ToString(),
                     model.Extension);
 
-                SaveBytesFile(model.SaveLocation, systemFileName, model.ByteArray);
+                SaveBytesFile(systemFileName, model.ByteArray);
             }
 
             using (SqlConnection conn = new SqlConnection(sqlConnectionString))
@@ -39,7 +39,6 @@ namespace WebApiApp.Services
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@UserFileName", model.UserFileName);
                     cmd.Parameters.AddWithValue("@SystemFileName", systemFileName);
-                    cmd.Parameters.AddWithValue("@Location", model.SaveLocation);
                     cmd.Parameters.AddWithValue("@ModifiedBy", 1);
                     cmd.Parameters.AddWithValue("@UserId", model.UserId);
 
@@ -69,25 +68,28 @@ namespace WebApiApp.Services
             }
         }
 
-        private void SaveBytesFile(string location, string systemFileName, byte[] Bytes)
+        private void SaveBytesFile(string systemFileName, byte[] Bytes)
         {
             string fileBase = "~/images";
-            var filePath = HttpContext.Current.Server.MapPath(fileBase + "/" + location + "/" + systemFileName);
+          //  var filePath = HttpContext.Current.Server.MapPath(fileBase + "/" + location + "/" + systemFileName);
             File.WriteAllBytes("C:/repos/github/WebApiApp/WebApiApp/images/"+systemFileName, Bytes);
         }
 
-        //public void DeleteFile(string filePath, int id)
-        //{
-        //    this.DataProvider.ExecuteNonQuery(
-        //    "Files_Delete",
-        //    inputParamMapper: delegate (SqlParameterCollection paramCol)
-        //    {
-        //        paramCol.AddWithValue("@Id", id);
-        //    }
-        //);
-
-        //    var deletePath = HttpContext.Current.Server.MapPath("~" + filePath);
-        //    File.Delete(deletePath);
-        //}
+        public void DeleteFile(string filePath, int id)
+        {
+            using (SqlConnection conn = new SqlConnection(sqlConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("Files_Delete", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+            }
+   
+            File.Delete(filePath);
+        }
     }
 }
