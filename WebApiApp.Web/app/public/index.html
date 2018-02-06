@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- CSS (load bootstrap) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .navbar {
+            border-radius: 0;
+        }
+    </style>
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
+    <script src="/app/public/modules/routes/app.routes.js"></script>
+    <script src="/app/public/app.public.js"></script>
+
+    <!-- SERVICES-->
+    <script src="/app/public/modules/user/user.service.js"></script>
+    <script src="/app/public/modules/profile/profile.service.js"></script>
+    <script src="/app/public/modules/newCard/create.service.js"></script>
+    <script src="/app/public/modules/createDeck/deck.service.js"></script>
+    <!-- CONTROLLERS -->
+    <script src="/app/public/modules/user/user.controller.js"></script>
+    <script src="/app/public/modules/profile/profile.controller.js"></script>
+    <script src="/app/public/modules/newCard/create.controller.js"></script>
+    <script src="/app/public/modules/createDeck/deck.controller.js"></script>
+
+
+</head>
+
+<!-- apply our angular app to our site -->
+<body ng-app="publicApp">
+
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Dddddddduel Time</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="profile">Profile</a></li>
+                <li><a ui-sref="create">Create Card</a></li>
+                <li><a href="decks">Create Deck</a></li>
+                <li><a href="duel">New Game</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <div ui-view></div>
+
+    </div>
+
+</body>
+</html>
