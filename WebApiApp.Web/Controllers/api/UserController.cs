@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using WebApiApp.Models;
 using WebApiApp.Models.Domain;
 using WebApiApp.Responses;
 using WebApiApp.Services;
@@ -12,32 +15,60 @@ namespace WebApiApp.Controllers.api
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
-        private IAuthenticationService _user;
+        private AuthRepository _repo = null;
+
         UserService svc = new UserService();
 
+        public UserController()
+        {
+            _repo = new AuthRepository();
+        }
+        
         //public UserController(IAuthenticationService user)
         //{
         //    _user = user;
         //}
 
         [Route("register"), HttpPost, AllowAnonymous]
-        public HttpResponseMessage Post(RegisterUser model)
+        public async Task<IHttpActionResult> Post(RegisterUser model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                string lowerEmail = model.Email.ToLower();
-                model.Email = lowerEmail;
-                ItemResponse<int> resp = new ItemResponse<int>();
-                int id = svc.Insert(model);
-                resp.Item = id;
-
-                return Request.CreateResponse(HttpStatusCode.OK, resp);
-
+                return BadRequest(ModelState);
             }
-            catch (Exception ex)
+            IdentityResult result = await _repo.RegisterUser(model);
+            IHttpActionResult errorResult = GetErrorResult(result);
+            if (errorResult != null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return errorResult;
             }
+
+            return Ok();
+            //try
+            //{
+            //    string lowerEmail = model.Email.ToLower();
+            //    model.Email = lowerEmail;
+            //    ItemResponse<int> resp = new ItemResponse<int>();
+            //    int id = svc.Insert(model);
+            //    resp.Item = id;
+
+            //    return Request.CreateResponse(HttpStatusCode.OK, resp);
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            //}
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _repo.Dispose();
+            }
+
+            base.Dispose(disposing);
         }
 
         [Route("login"), HttpPost, AllowAnonymous]
@@ -67,5 +98,34 @@ namespace WebApiApp.Controllers.api
 
         //    return Request.CreateResponse(HttpStatusCode.OK, new SuccessResponse());
         //}
+
+        private IHttpActionResult GetErrorResult(IdentityResult result)
+        {
+            if (result == null)
+            {
+                return InternalServerError();
+            }
+
+            if (!result.Succeeded)
+            {
+                if (result.Errors != null)
+                {
+                    foreach (string error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+                }
+
+                if (ModelState.IsValid)
+                {
+                    // No ModelState errors are available to send, so just return an empty BadRequest.
+                    return BadRequest();
+                }
+
+                return BadRequest(ModelState);
+            }
+
+            return null;
+        }
     }
 }
