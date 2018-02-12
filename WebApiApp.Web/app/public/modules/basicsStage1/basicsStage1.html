@@ -1,10 +1,37 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<div class="container-fluid">
+    <h1>Basics: Stage 1</h1>
+    <h2>Variables and Datatypes</h2>
+    <div ng-show="$ctrl.learning">
+        <div>
+            <h3>What are variables?</h3>
+            <p>A variable is used to store a value.</p>
+            <p>For example:</p>
+            <p>int myVar = 1;</p>
+            <p>Here, the variable is called "myVar" and it has a value of 1.</p>
+        </div>
+        <div>
+            <h3>What are datatypes?</h3>
+            <p>Datatypes are the different kinds of values that a variable can hold.</p>
+            <p>In our first example, we declared and initialized the variable myVar by typing int myVar = 1;</p>
+            <p>Here, the datatype is an integer (int) which is a whole number.</p>
+            <p>Other data types are:</p>
+            <ol>
+                <li>char - single characters like c, $, *</li>
+                <li class="example">ex) char example1 = 'a';</li>
+                <li>string - all string of characters of any length</li>
+                <li class="example">ex) string example2 = "This is a string!";</li>
+                <li>bool - true or false</li>
+                <li class="example">ex) bool example3 = true;</li>
+            </ol>
+        </div>
+    </div>
 
-</body>
-</html>
+    <div>
+        <h3>Review</h3>
+        <p>Let's review what we've learned so far!</p>
+        <button ng-click="$ctrl.startQuiz()">Start</button>
+        <div ng-show="$ctrl.reviewing">
+            <button ng-click="$ctrl.submitQuiz()">Submit</button>
+        </div>
+    </div>
+</div>
